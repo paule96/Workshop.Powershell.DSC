@@ -117,5 +117,15 @@ $ConfigurationData = @{
 
 ## Add a DSC configuration to the PULL Server
 
+You must compile your configuration first to `.mof`. Then you must create checksum for all `.mof` files. This can be easy done with the following command:
 
+```powershell
+New-DscCheckSum -Path .\ -Force
+```
+
+> Important: Without a checksum the clients don't know that a configuration has change. This is also a challenge if you update modules only.
+
+Then you can copy all files to the to the path you configured on your clients as `ConfigurationRepositoryShare`. Then you are done if you don't use external modules in your configurations.
+
+> To add external modules to your pull server see [here](https://docs.microsoft.com/en-us/powershell/dsc/pull-server/pullserversmb#placing-configurations-and-resources).
 
